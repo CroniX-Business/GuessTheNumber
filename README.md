@@ -1,6 +1,6 @@
 # GuessTheNumber
 
-Guess the number is a simple game made with SWING GUI.
+Guess the number is a simple game made with SWING GUI
 
 
 ## How to start?
