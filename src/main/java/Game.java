@@ -7,14 +7,14 @@ import java.util.Random;
 public class Game extends JFrame implements ActionListener{
     Random rand = new Random();
     JFrame frame = new JFrame("Guess the Number");
-    JLabel topLeft = new JLabel("Upišite broj 0-100:");
-    JLabel topRight = new JLabel("Pokušaji:");
+    JLabel topLeft = new JLabel("Type the number 0-100:");
+    JLabel topRight = new JLabel("Tries:");
     JLabel bottom = new JLabel();
     JLabel tries = new JLabel("0");
 
     JTextField brojField = new JTextField();
 
-    JButton upis = new JButton("Upiši");
+    JButton upis = new JButton("Send");
 
     private String str;
     private int broj;
@@ -71,7 +71,7 @@ public class Game extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == upis) {
             if (brojField.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Niste upisali broj u predviđeno područje", "POGREŠKA", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "You have not entered a number in the provided field", "POGREŠKA", JOptionPane.ERROR_MESSAGE);
             } else {
                 broj = Integer.parseInt(brojField.getText());
                 provjeraBroja(broj);
@@ -82,7 +82,7 @@ public class Game extends JFrame implements ActionListener{
     public void provjeraBroja(int a) {
         if (a == random_broj) {
             tries.setText(String.valueOf(counter+1));
-            JOptionPane.showMessageDialog(null, "Pogodak\nPogodili ste iz " + (counter+1) + " pokušaja");
+            JOptionPane.showMessageDialog(null, "Congratulations\nYou guessed it from " + (counter+1) + " tries");
             tries.setText("0");
             counter = 0;
             random_broj = rand.nextInt(100);
@@ -90,11 +90,11 @@ public class Game extends JFrame implements ActionListener{
             if(a < random_broj) {
                 counter++;
                 tries.setText(String.valueOf(counter));
-                bottom.setText("Broj je veći od vašeg");
+                bottom.setText("The number is higher than yours");
             } else {
                 counter++;
                 tries.setText(String.valueOf(counter));
-                bottom.setText("Broj je manji od vašeg");
+                bottom.setText("The number is less than yours");
             }
         }
     }
