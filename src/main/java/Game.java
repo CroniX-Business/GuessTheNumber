@@ -11,6 +11,9 @@ public class Game extends JFrame implements ActionListener{
     JLabel topRight = new JLabel("Tries:");
     JLabel bottom = new JLabel();
     JLabel tries = new JLabel("0");
+
+    JLabel lastNumberText = new JLabel("Last number:");
+    JLabel lastNumber = new JLabel("");
     JTextField brojField = new JTextField();
 
     JButton upis = new JButton("Send");
@@ -21,6 +24,8 @@ public class Game extends JFrame implements ActionListener{
     private int random_broj;
     private int counter = 0;
     Game() {
+        random_broj = rand.nextInt(100);
+
         topLeft.setBounds(10,10,150,30);
         topLeft.setForeground(Color.white);
         topLeft.setHorizontalAlignment(JLabel.CENTER);
@@ -37,6 +42,16 @@ public class Game extends JFrame implements ActionListener{
         tries.setForeground(Color.white);
         tries.setHorizontalAlignment(JLabel.CENTER);
         tries.setHorizontalTextPosition(JLabel.RIGHT);
+
+        lastNumberText.setBounds(250,30,80,30);
+        lastNumberText.setForeground(Color.white);
+        lastNumberText.setHorizontalAlignment(JLabel.CENTER);
+        lastNumberText.setHorizontalTextPosition(JLabel.RIGHT);
+
+        lastNumber.setBounds(320,30,50,30);
+        lastNumber.setForeground(Color.white);
+        lastNumber.setHorizontalAlignment(JLabel.CENTER);
+        lastNumber.setHorizontalTextPosition(JLabel.RIGHT);
 
         upis.setBounds(135, 55, 100, 40);
         upis.setBackground(new Color(94,110,216));
@@ -57,11 +72,14 @@ public class Game extends JFrame implements ActionListener{
         frame.add(tries);
         frame.add(upis);
         frame.add(bottom);
+        frame.add(lastNumber);
+        frame.add(lastNumberText);
 
         frame.setSize(400, 170);
         frame.getContentPane().setBackground(new Color(60,71,139));
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getRootPane().setDefaultButton(upis);
         frame.setLocationRelativeTo(null);
         frame.setLayout(null);
         frame.setVisible(true);
@@ -89,17 +107,23 @@ public class Game extends JFrame implements ActionListener{
             tries.setText(String.valueOf(counter+1));
             JOptionPane.showMessageDialog(null, "Congratulations\nYou guessed it from " + (counter+1) + " tries");
             tries.setText("0");
+            lastNumber.setText("");
+            brojField.setText("");
             counter = 0;
             random_broj = rand.nextInt(100);
         } else {
             if(a < random_broj) {
                 counter++;
                 tries.setText(String.valueOf(counter));
-                bottom.setText("The number is higher than yours");
+                bottom.setText("Too low");
+                lastNumber.setText(brojField.getText());
+                brojField.setText("");
             } else {
                 counter++;
                 tries.setText(String.valueOf(counter));
-                bottom.setText("The number is less than yours");
+                bottom.setText("Too high");
+                lastNumber.setText(brojField.getText());
+                brojField.setText("");
             }
         }
     }

@@ -48,6 +48,7 @@ public class Menu implements ActionListener {
         frame.setSize(420,350);
         frame.getContentPane().setBackground(new Color(60,71,139));
         frame.setLayout(null);
+        frame.getRootPane().setDefaultButton(startGame);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
