@@ -6,18 +6,18 @@ import java.util.Random;
 
 public class Game extends JFrame implements ActionListener{
     Random rand = new Random();
-    JFrame frame = new JFrame("Guess the Number");
+    JFrame frame = new JFrame( "Guess the Number");
     JLabel topLeft = new JLabel("Type the number 0-100:");
     JLabel topRight = new JLabel("Tries:");
     JLabel bottom = new JLabel();
     JLabel tries = new JLabel("0");
-
     JTextField brojField = new JTextField();
 
     JButton upis = new JButton("Send");
 
     private String str;
     private int broj;
+    private int checkBroj;
     private int random_broj;
     private int counter = 0;
     Game() {
@@ -72,9 +72,14 @@ public class Game extends JFrame implements ActionListener{
         if(e.getSource() == upis) {
             if (brojField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "You have not entered a number in the provided field", "POGREŠKA", JOptionPane.ERROR_MESSAGE);
-            } else {
-                broj = Integer.parseInt(brojField.getText());
-                provjeraBroja(broj);
+            } else{
+                try {
+                    broj = Integer.parseInt(brojField.getText());
+                    provjeraBroja(broj);
+                }
+                catch (NumberFormatException err) {
+                    JOptionPane.showMessageDialog(null, "You have entered a word not a number", "POGREŠKA", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }
